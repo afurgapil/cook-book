@@ -9,7 +9,6 @@ import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import AppylEditor from "./pages/ApplyEditor";
 import ResetPassword from "./pages/ResetPassword";
-import ForgotPassword from "./components/ForgotPassword";
 import NotFound from "./pages/NotFound";
 
 //*private
@@ -35,8 +34,7 @@ function App() {
     { path: "/kayit", component: SignUp },
     { path: "/giris", component: SignIn },
     { path: "/basvur", component: AppylEditor },
-    { path: "/sifre", component: ForgotPassword },
-    { path: "/reset-password/", component: ResetPassword },
+    { path: "/sifre/", component: ResetPassword },
   ];
   const privateRoutes = [
     { path: "/malzemeler", component: Ingredients },

@@ -115,8 +115,13 @@ router.put("/update/isAdmin/:id", async (req, res) => {
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }
-    user.isAdmin = value;
-    await user.save();
+    try {
+      user.isAdmin = value;
+      await user.save();
+    } catch (error) {
+      console.log("An error while saving:", error);
+    }
+
     res.json({ message: "User has been granted admin privileges" });
   } catch (error) {
     res.status(500).json({ error: "Error granting admin privileges to user" });
@@ -157,8 +162,13 @@ router.post("/reset-password", async (req, res) => {
       from: "apicookbook@gmail.com",
       to: userEmail,
       subject: "Şifre Sıfırlama Talebi",
-      text: `Merhaba,\n\nŞifrenizi sıfırlamak için aşağıdaki bağlantıyı kullanabilirsiniz:\n\n${APP_URL}/reset-password?token=${resetToken}\n\nBu bağlantı, şifrenizi sıfırlamak için ${time} dakika geçerlidir. Eğer şifre sıfırlama talebinde bulunmadıysanız, bu e-postayı göz ardı edebilirsiniz.\n\nİyi günler dileriz,\nAPI Cookbook Ekibi`,
+      html: `<p>Merhaba,</p>
+    <p>Şifrenizi sıfırlamak için aşağıdaki bağlantıya tıklayabilirsiniz:</p>
+    <p><a href="${APP_URL}/sifre?token=${resetToken}">Buraya tıklayarak şifrenizi sıfırlayın</a></p>
+    <p>Bu bağlantı, şifrenizi sıfırlamak için ${time} dakika geçerlidir. Eğer şifre sıfırlama talebinde bulunmadıysanız, bu e-postayı göz ardı edebilirsiniz.</p>
+    <p>İyi günler dileriz,<br>API Cookbook Ekibi</p>`,
     };
+
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
         console.log("E-posta gönderilirken hata oluştu:", error);
@@ -205,7 +215,7 @@ router.post("/reset-password/:token", async (req, res) => {
     user.password = newPassword;
 
     user.token = null;
-    user.tokenEnd = null;
+    user.tokenEnd = new Date();
 
     await user.save();
 
