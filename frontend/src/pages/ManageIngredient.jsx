@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { Container, Row, Col, Button } from "reactstrap";
+import { ToastContainer, toast } from "react-toastify";
+
 import API_URL from "../config.jsx";
 function EditIngredient() {
   const [ingredients, setIngredients] = useState([]);
@@ -43,6 +45,16 @@ function EditIngredient() {
       });
       const data = await response.json();
       console.log(data.message);
+      toast.success("Malzeme Silindi!", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       fetchIngredients();
     } catch (error) {
       console.error("Error deleting article:", error);
@@ -64,6 +76,16 @@ function EditIngredient() {
       const data = await response.json();
       console.log("Updated Article:", data);
       setEditingIngredientId(null);
+      toast.success("Malzeme Güncellendi!", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       fetchIngredients();
     } catch (error) {
       console.error("Error updating article:", error);
@@ -72,6 +94,18 @@ function EditIngredient() {
 
   return (
     <Container id="page" className="my-5">
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       <Row>
         {sortedIngredients.map((ingredient) => (
           <Col key={ingredient._id} xs={12} md={6}>

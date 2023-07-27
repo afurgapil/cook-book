@@ -6,6 +6,8 @@ import {
   ListGroupItem,
   ListGroupItemText,
 } from "reactstrap";
+import { ToastContainer, toast } from "react-toastify";
+
 import API_URL from "../config";
 const ManageUsers = () => {
   const [users, setUsers] = useState([]);
@@ -53,14 +55,23 @@ const ManageUsers = () => {
       }
 
       const data = await response.json();
-      console.log(data); // Başarı durumunda mesajı alabilirsiniz
+      console.log(data);
+      toast.success("Üyelerin Malzeme Listesi Güncellendi!", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     } catch (error) {
       console.error("Error updating ingredient list:", error.message);
     }
   };
   const handleAdminButtonClick = async (userId, value) => {
     try {
-      console.log(value);
       const response = await fetch(
         `${API_URL}/user/update/isAdmin/${userId}/`,
         {
@@ -73,7 +84,16 @@ const ManageUsers = () => {
       );
 
       if (response.ok) {
-        console.log("User's isAdmin property updated successfully.");
+        toast.success("Üye Bilgisi Güncellendi!", {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
         fetchUsers();
       } else {
         console.error("Failed to set admin role.");
@@ -85,6 +105,18 @@ const ManageUsers = () => {
 
   return (
     <Container id="page">
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       <div className="row mt-5">
         <div className="col">
           <ListGroup>

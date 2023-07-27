@@ -10,6 +10,7 @@ import {
   Input,
   Button,
 } from "reactstrap";
+import { ToastContainer, toast } from "react-toastify";
 import API_URL from "../config";
 
 const CreateIngredient = () => {
@@ -37,6 +38,16 @@ const CreateIngredient = () => {
       if (response.ok) {
         setCategory("");
         setName("");
+        toast.success("Malzeme Kaydedildi!", {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
       } else {
         console.error("Failed to create ingredient.");
       }
@@ -47,6 +58,18 @@ const CreateIngredient = () => {
 
   return (
     <Container id="page">
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       <Row className="justify-content-center">
         <Col md={6}>
           <h2 className="text-center mt-1">Malzeme Ekle</h2>

@@ -10,6 +10,8 @@ import {
   ModalBody,
   ModalFooter,
 } from "reactstrap";
+import { ToastContainer, toast } from "react-toastify";
+
 import API_URL from "../config";
 const ManageUsers = () => {
   const [recipes, setRecipes] = useState([]);
@@ -50,6 +52,16 @@ const ManageUsers = () => {
 
       if (response.ok) {
         fetchRecipes();
+        toast.success("Yemek Silindi!", {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
       } else {
         console.error("Failed to delete recipe.");
       }
@@ -74,12 +86,34 @@ const ManageUsers = () => {
       setEditingRecipeId(null);
       fetchRecipes();
       toggleModal();
+      toast.success("Yemek Güncellendi!", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     } catch (error) {
       console.error("Error updating Recipe:", error);
     }
   };
   return (
     <Container id="page">
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       <div className="row mt-5">
         {recipes.map((recipe) => (
           <div key={recipe._id} className="col-md-4 mt-3">

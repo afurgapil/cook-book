@@ -14,6 +14,8 @@ import {
 } from "reactstrap";
 import { UserContext } from "../context/UserContext";
 import Resizer from "react-image-file-resizer";
+import { ToastContainer, toast } from "react-toastify";
+
 import API_URL from "../config";
 const CreateRecipe = () => {
   const { user } = useContext(UserContext);
@@ -114,6 +116,16 @@ const CreateRecipe = () => {
         setTime("");
         setHowKnow("");
         setRecipeIngredients([]);
+        toast.success("Yemek Kaydedildi!", {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
       } else {
         throw new Error("Failed to create recipe.");
       }
@@ -172,6 +184,18 @@ const CreateRecipe = () => {
   const groupedIngredients = groupIngredientsByCategory(dbIngredients);
   return (
     <div className="d-flex  align-items-center justify-content-center">
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       <Container className="mt-3 mx-2 ">
         <Row className="d-flex flex-row align-items-start justify-content-start">
           <Col>
