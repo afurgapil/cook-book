@@ -10,6 +10,22 @@ import img1 from "../assets/1.jpg";
 import img2 from "../assets/2.jpg";
 import img3 from "../assets/3.jpg";
 import img4 from "../assets/4.jpg";
+import im1 from "../assets/place/Dosya 1.jpg";
+import im2 from "../assets/place/Dosya 2.jpg";
+import im3 from "../assets/place/Dosya 3.jpg";
+import im4 from "../assets/place/Dosya 4.jpg";
+import im5 from "../assets/place/Dosya 5.jpg";
+import im6 from "../assets/place/Dosya 6.jpg";
+import im7 from "../assets/place/Dosya 7.jpg";
+import im8 from "../assets/place/Dosya 8.jpg";
+import im9 from "../assets/place/Dosya 9.jpg";
+import im10 from "../assets/place/Dosya 10.jpg";
+import im11 from "../assets/place/Dosya 11.jpg";
+import im12 from "../assets/place/Dosya 12.jpg";
+import im13 from "../assets/place/Dosya 13.jpg";
+import im14 from "../assets/place/Dosya 14.jpg";
+import im15 from "../assets/place/Dosya 15.jpg";
+import im16 from "../assets/place/Dosya 16.jpg";
 import { BiMoney } from "react-icons/bi";
 import { GiThink } from "react-icons/gi";
 import { SiFastly } from "react-icons/si";
@@ -49,22 +65,22 @@ const items = [
   },
 ];
 const images = [
-  { name: "image1", path: "../src/assets/place/Dosya 1.jpg" },
-  { name: "image2", path: "../src/assets/place/Dosya 2.jpg" },
-  { name: "image3", path: "../src/assets/place/Dosya 3.jpg" },
-  { name: "image4", path: "../src/assets/place/Dosya 4.jpg" },
-  { name: "image5", path: "../src/assets/place/Dosya 5.jpg" },
-  { name: "image6", path: "../src/assets/place/Dosya 6.jpg" },
-  { name: "image7", path: "../src/assets/place/Dosya 7.jpg" },
-  { name: "image8", path: "../src/assets/place/Dosya 8.jpg" },
-  { name: "image9", path: "../src/assets/place/Dosya 9.jpg" },
-  { name: "image10", path: "../src/assets/place/Dosya 10.jpg" },
-  { name: "image11", path: "../src/assets/place/Dosya 11.jpg" },
-  { name: "image12", path: "../src/assets/place/Dosya 12.jpg" },
-  { name: "image13", path: "../src/assets/place/Dosya 13.jpg" },
-  { name: "image14", path: "../src/assets/place/Dosya 14.jpg" },
-  { name: "image15", path: "../src/assets/place/Dosya 15.jpg" },
-  { name: "image16", path: "../src/assets/place/Dosya 16.jpg" },
+  { name: "image1", path: im1 },
+  { name: "image2", path: im2 },
+  { name: "image3", path: im3 },
+  { name: "image4", path: im4 },
+  { name: "image5", path: im5 },
+  { name: "image6", path: im6 },
+  { name: "image7", path: im7 },
+  { name: "image8", path: im8 },
+  { name: "image9", path: im9 },
+  { name: "image10", path: im10 },
+  { name: "image11", path: im11 },
+  { name: "image12", path: im12 },
+  { name: "image13", path: im13 },
+  { name: "image14", path: im14 },
+  { name: "image15", path: im15 },
+  { name: "image16", path: im16 },
 ];
 
 function Home() {
