@@ -18,6 +18,9 @@ import Favorites from "./pages/Favorites";
 import Recipes from "./pages/Recipes";
 import RecipeDetail from "./pages/RecipeDetail";
 import Foods from "./pages/Foods";
+import Places from "./pages/Places";
+import CreatePlace from "./pages/CreatePlace";
+import PlaceDetail from "./pages/PlaceDetail";
 
 //*pro
 import ManageUsers from "./pages/ManageUsers";
@@ -42,6 +45,9 @@ function App() {
     { path: "/tarifler", component: Recipes },
     { path: "/tarif/:id", component: RecipeDetail },
     { path: "/yemekler", component: Foods },
+    { path: "/mekanlar", component: Places },
+    { path: "/mekan-ekle", component: CreatePlace },
+    { path: "/mekan/:id", component: PlaceDetail },
   ];
   const protectedRoutes = [
     { path: "/manage-users", component: ManageUsers },

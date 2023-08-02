@@ -62,7 +62,6 @@ const Header = () => {
                     Ne Yiyebilirim?
                   </Link>
                 </NavItem>
-
                 <NavItem>
                   <Link to="/tarifler" className="nav-link">
                     Yemekler
@@ -71,6 +70,11 @@ const Header = () => {
                 <NavItem>
                   <Link to="/malzemeler" className="nav-link">
                     Malzemelerim
+                  </Link>
+                </NavItem>
+                <NavItem>
+                  <Link to="/mekanlar" className="nav-link">
+                    Mekanlar
                   </Link>
                 </NavItem>
                 <div className="d-flex flex-row justify-content-between align-items-center">

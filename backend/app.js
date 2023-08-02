@@ -10,6 +10,7 @@ const port = config.PORT;
 const userRouter = require("./routes/userRouter");
 const ingredientRouter = require("./routes/ingredientRouter");
 const recipeRouter = require("./routes/recipeRouter");
+const placeRouter = require("./routes/placeRouter");
 app.use(express.json());
 app.use(cors());
 app.use(bodyParser.json({ limit: "50mb", extended: true }));
@@ -39,6 +40,7 @@ app.get("/random-photo", async (req, res) => {
 app.use("/user", userRouter);
 app.use("/ingredients", ingredientRouter);
 app.use("/recipe", recipeRouter);
+app.use("/place", placeRouter);
 
 //!connection
 mongoose
