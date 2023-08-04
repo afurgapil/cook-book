@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import API_URL from "../config";
-import { Container, Row, Col, Button } from "reactstrap";
+import { Container, Row, Col } from "reactstrap";
 import { Link } from "react-router-dom";
 import {
   MdCleaningServices,
@@ -8,11 +8,10 @@ import {
   MdComment,
   MdMenuBook,
 } from "react-icons/md";
-import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
+import { FaPlus } from "react-icons/fa";
 function Places() {
   const [places, setPlaces] = useState([]);
   const [sortBy, setSortBy] = useState("");
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   useEffect(() => {
     fetchPlaces();
@@ -70,58 +69,41 @@ function Places() {
   const handleSortChange = (e) => {
     setSortBy(e.target.value);
   };
-  const handleSidebarToggle = () => {
-    setIsSidebarOpen(!isSidebarOpen);
-  };
+
   return (
     <Container id="page">
       <div className="m-2 d-flex justify-content-between flex-row align-items-center border-bottom border-1 border-black">
         <h2>Mekanlar</h2>
-        <div className="my-3">
-          <select
-            id="sort"
-            className="form-select bg-danger-subtle "
-            value={sortBy}
-            onChange={handleSortChange}
+        <div className="d-flex flex-row align-items-center">
+          <Link
+            to="/mekan-ekle"
+            className="btn btn-primary mx-2 text-white  text-decoration-none d-flex flex-row align-items-center"
           >
-            <option value="">Sıralama seçin</option>
-            <option value="alphabeticalOne">Alfabetik (a-z)</option>
-            <option value="alphabeticalTwo">Alfabetik (z-a)</option>
-            <option value="menuCountUp">Menü Sayısı ↑</option>
-            <option value="menuCountDown">Menü Sayısı ↓</option>
-            <option value="commentCountUp">Yorum Sayısı ↑</option>
-            <option value="commentCountDown">Yorum Sayısı ↓</option>
-            <option value="cleaningUp">Temizlik Puanı ↑</option>
-            <option value="cleaningDown">Temizlik Puanı ↓</option>
-            <option value="serviceUp">Hizmet Puanı↑</option>
-            <option value="serviceDown">Hizmet Puanı↓</option>
-          </select>
+            <FaPlus></FaPlus>
+            <span>Favorinizi Ekleyin!</span>
+          </Link>
+          <div className="my-3 mx-2">
+            <select
+              id="sort"
+              className="form-select bg-danger-subtle "
+              value={sortBy}
+              onChange={handleSortChange}
+            >
+              <option value="">Sıralama seçin</option>
+              <option value="alphabeticalOne">Alfabetik (a-z)</option>
+              <option value="alphabeticalTwo">Alfabetik (z-a)</option>
+              <option value="menuCountUp">Menü Sayısı ↑</option>
+              <option value="menuCountDown">Menü Sayısı ↓</option>
+              <option value="commentCountUp">Yorum Sayısı ↑</option>
+              <option value="commentCountDown">Yorum Sayısı ↓</option>
+              <option value="cleaningUp">Temizlik Puanı ↑</option>
+              <option value="cleaningDown">Temizlik Puanı ↓</option>
+              <option value="serviceUp">Hizmet Puanı↑</option>
+              <option value="serviceDown">Hizmet Puanı↓</option>
+            </select>
+          </div>
         </div>
       </div>
-      <Button
-        onClick={handleSidebarToggle}
-        color="primary"
-        style={{
-          position: "fixed",
-          top: "23%",
-          left: isSidebarOpen ? "125px" : "20px",
-          transform: "translate(-50%, -50%)",
-          zIndex: 999,
-          transition: " 0.3s",
-        }}
-        className="z-n1"
-      >
-        {isSidebarOpen ? (
-          <div className="d-flex align-items-center">
-            <FaArrowLeft size={24} />
-            <Link to="/mekan-ekle" className="text-white  text-decoration-none">
-              Favori Mekanlarinizi Ekleyin
-            </Link>
-          </div>
-        ) : (
-          <FaArrowRight size={24} />
-        )}
-      </Button>
       {places.length > 0 ? (
         <Row className="my-5">
           {sortPlaces(places).map((place) => (
