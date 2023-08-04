@@ -109,6 +109,7 @@ function Places() {
           zIndex: 999,
           transition: " 0.3s",
         }}
+        className="z-n1"
       >
         {isSidebarOpen ? (
           <div className="d-flex align-items-center">
