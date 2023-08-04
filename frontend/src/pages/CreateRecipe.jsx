@@ -118,7 +118,7 @@ const CreateRecipe = () => {
         setRecipeIngredients([]);
         toast.success("Yemek Kaydedildi!", {
           position: "top-right",
-          autoClose: 3000,
+          autoClose: 1000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -186,7 +186,7 @@ const CreateRecipe = () => {
     <div className="d-flex  align-items-center justify-content-center">
       <ToastContainer
         position="top-right"
-        autoClose={3000}
+        autoClose={1000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick

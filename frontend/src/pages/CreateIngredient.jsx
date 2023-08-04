@@ -40,7 +40,7 @@ const CreateIngredient = () => {
         setName("");
         toast.success("Malzeme Kaydedildi!", {
           position: "top-right",
-          autoClose: 3000,
+          autoClose: 1000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -60,7 +60,7 @@ const CreateIngredient = () => {
     <Container id="page">
       <ToastContainer
         position="top-right"
-        autoClose={3000}
+        autoClose={1000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
@@ -100,7 +100,7 @@ const CreateIngredient = () => {
                 <option value="Kahvaltılık">Kahvaltılık</option>
                 <option value="Meyve">Meyve</option>
                 <option value="Sebze">Sebze</option>
-                <option value="Sos">Temel Gıda</option>
+                <option value="Temel Gida">Temel Gıda</option>
                 <option value="Şarküteri">Şarküteri</option>
                 <option value="Süt Ürünleri">Süt Ürünleri</option>
                 <option value="Unlu Mamül">Unlu Mamül</option>

@@ -54,7 +54,7 @@ const ManageUsers = () => {
         fetchRecipes();
         toast.success("Yemek Silindi!", {
           position: "top-right",
-          autoClose: 3000,
+          autoClose: 1000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -88,7 +88,7 @@ const ManageUsers = () => {
       toggleModal();
       toast.success("Yemek Güncellendi!", {
         position: "top-right",
-        autoClose: 3000,
+        autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -104,7 +104,7 @@ const ManageUsers = () => {
     <Container id="page">
       <ToastContainer
         position="top-right"
-        autoClose={3000}
+        autoClose={1000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick

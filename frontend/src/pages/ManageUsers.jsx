@@ -58,7 +58,7 @@ const ManageUsers = () => {
       console.log(data);
       toast.success("Üyelerin Malzeme Listesi Güncellendi!", {
         position: "top-right",
-        autoClose: 3000,
+        autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -86,7 +86,7 @@ const ManageUsers = () => {
       if (response.ok) {
         toast.success("Üye Bilgisi Güncellendi!", {
           position: "top-right",
-          autoClose: 3000,
+          autoClose: 1000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -107,7 +107,7 @@ const ManageUsers = () => {
     <Container id="page">
       <ToastContainer
         position="top-right"
-        autoClose={3000}
+        autoClose={1000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick

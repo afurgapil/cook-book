@@ -47,7 +47,7 @@ function EditIngredient() {
       console.log(data.message);
       toast.success("Malzeme Silindi!", {
         position: "top-right",
-        autoClose: 3000,
+        autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -78,7 +78,7 @@ function EditIngredient() {
       setEditingIngredientId(null);
       toast.success("Malzeme Güncellendi!", {
         position: "top-right",
-        autoClose: 3000,
+        autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -96,7 +96,7 @@ function EditIngredient() {
     <Container id="page" className="my-5">
       <ToastContainer
         position="top-right"
-        autoClose={3000}
+        autoClose={1000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
