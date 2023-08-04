@@ -15,7 +15,7 @@ import {
 import { UserContext } from "../context/UserContext";
 import logo from "../assets/logo.svg";
 import Signout from "./SignOut";
-
+import { useNavigate } from "react-router-dom";
 const Header = () => {
   const [isAuth, setIsAuth] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -23,9 +23,11 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [panelOpen, setPanelOpen] = useState(false);
+  const navigate = useNavigate();
   const toggle = () => setIsOpen(!isOpen);
   const togglePanel = () => setPanelOpen((prevState) => !prevState);
   const toggleDropdown = () => setDropdownOpen((prevState) => !prevState);
+
   useEffect(() => {
     if (user) {
       setIsAuth(user.isAdmin);
@@ -37,21 +39,29 @@ const Header = () => {
   } else {
     return (
       <Navbar id="header" light expand="md">
-        <NavbarBrand className="mr-auto">
+        <NavbarBrand
+          className="mr-auto pe-auto"
+          onClick={() => {
+            navigate("/");
+          }}
+          style={{ cursor: "pointer" }}
+        >
           <div className="d-flex align-items-center">
             <img
               src={logo}
               className="pe-2 border-end border-black border-3"
               alt="Cook Book Logo"
             />
-            <span>COOK BOOK</span>
+            <span className="ms-2 fs-1" style={{ fontFamily: "Oswold" }}>
+              COOK BOOK
+            </span>
           </div>
         </NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar className="flex-grow-0 mr-auto">
           <Nav className="ml-auto " navbar>
             <NavItem>
-              <Link to="/" className="nav-link ">
+              <Link to="/" className="nav-link">
                 Anasayfa
               </Link>
             </NavItem>

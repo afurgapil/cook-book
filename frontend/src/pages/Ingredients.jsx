@@ -8,14 +8,15 @@ import {
   CardBody,
   CardText,
   Input,
+  Collapse,
 } from "reactstrap";
 import API_URL from "../config";
-
+import { BiSolidUpArrow, BiSolidDownArrow } from "react-icons/bi";
 const Ingredients = () => {
   const { user } = useContext(UserContext);
   const [userIngredients, setUserIngredients] = useState([]);
   const [userId, setUserId] = useState(null);
-
+  const [openCategories, setOpenCategories] = useState([]);
   useEffect(() => {
     if (user) {
       setUserId(user._id);
@@ -58,7 +59,15 @@ const Ingredients = () => {
         return "gray";
     }
   };
-
+  const toggleCategory = (category) => {
+    setOpenCategories((prevOpenCategories) => {
+      if (prevOpenCategories.includes(category)) {
+        return prevOpenCategories.filter((cat) => cat !== category);
+      } else {
+        return [...prevOpenCategories, category];
+      }
+    });
+  };
   const fetchIngredients = async () => {
     try {
       const userIngredientsResponse = await fetch(
@@ -141,38 +150,58 @@ const Ingredients = () => {
       ) : (
         Object.entries(groupedIngredients).map(([category, ingredients]) => (
           <div key={category} className="mt-4">
-            <h3>{category}</h3>
-            <Row>
-              {ingredients.map((ingredient) => (
-                <Col sm="4" md="2" key={ingredient._id}>
-                  <Card
-                    className={`mb-4 d-flex flex-row text-white fs-6`}
-                    style={{
-                      backgroundColor: getCategoryColor(category.toLowerCase()),
-                    }}
-                    onClick={() =>
-                      handleCheckboxChange(
-                        ingredient._id,
-                        !ingredient.isAvailable
-                      )
-                    }
-                  >
-                    <CardBody className="d-flex flex-row justify-content-between align-items-center w-50">
-                      <CardText>{ingredient.name}</CardText>
-                      <Input
-                        type="checkbox"
-                        id={ingredient._id}
-                        checked={ingredient.isAvailable}
-                        onChange={(e) =>
-                          handleCheckboxChange(ingredient._id, e.target.checked)
-                        }
-                        label=""
-                      />
-                    </CardBody>
-                  </Card>
-                </Col>
-              ))}
-            </Row>
+            <h3
+              style={{ cursor: "pointer" }}
+              onClick={() => toggleCategory(category)}
+              className="border-bottom border-2 border-black d-flex align-items-center flex-row justify-content-between mx-1 p-1"
+            >
+              <span> {category}</span>
+              {openCategories.includes(category) ? (
+                <BiSolidUpArrow className="ms-2" />
+              ) : (
+                <BiSolidDownArrow className="ms-2" />
+              )}
+            </h3>
+            <Collapse isOpen={openCategories.includes(category)}>
+              <Row>
+                {ingredients.map((ingredient) => (
+                  <Col sm="4" md="2" key={ingredient._id}>
+                    <Card
+                      className={`mb-4 d-flex flex-row text-white fs-6`}
+                      style={{
+                        backgroundColor: getCategoryColor(
+                          category.toLowerCase()
+                        ),
+                      }}
+                      onClick={() =>
+                        handleCheckboxChange(
+                          ingredient._id,
+                          !ingredient.isAvailable
+                        )
+                      }
+                    >
+                      <CardBody className="d-flex flex-row justify-content-between align-items-center w-50">
+                        <CardText className="my-0 py-0 pe-1">
+                          {ingredient.name}
+                        </CardText>
+                        <Input
+                          type="checkbox"
+                          id={ingredient._id}
+                          checked={ingredient.isAvailable}
+                          onChange={(e) =>
+                            handleCheckboxChange(
+                              ingredient._id,
+                              e.target.checked
+                            )
+                          }
+                          label=""
+                        />
+                      </CardBody>
+                    </Card>
+                  </Col>
+                ))}
+              </Row>
+            </Collapse>
           </div>
         ))
       )}

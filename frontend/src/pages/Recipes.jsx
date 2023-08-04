@@ -19,11 +19,44 @@ import AnimatedText from "../components/AnimatedText";
 import API_URL from "../config";
 function Recipes() {
   const [recipes, setRecipes] = useState([]);
+  const [sortBy, setSortBy] = useState("");
 
   useEffect(() => {
     fetchRecipes();
   }, []);
-
+  const sortRecipes = (recipes) => {
+    switch (sortBy) {
+      case "alphabeticalOne":
+        return recipes.slice().sort((a, b) => a.name.localeCompare(b.name));
+      case "alphabeticalTwo":
+        return recipes.slice().sort((a, b) => b.name.localeCompare(a.name));
+      case "likeCountUp":
+        return recipes.slice().sort((a, b) => a.likes.length - b.likes.length);
+      case "likeCountDown":
+        return recipes.slice().sort((a, b) => b.likes.length - a.likes.length);
+      case "dislikeCountUp":
+        return recipes
+          .slice()
+          .sort((a, b) => a.dislikes.length - b.dislikes.length);
+      case "dislikeCountDown":
+        return recipes
+          .slice()
+          .sort((a, b) => b.dislikes.length - a.dislikes.length);
+      case "favoriCountUp":
+        return recipes
+          .slice()
+          .sort((a, b) => a.favorites.length - b.favorites.length);
+      case "favoriCountDown":
+        return recipes
+          .slice()
+          .sort((a, b) => b.favorites.length - a.favorites.length);
+      default:
+        return recipes;
+    }
+  };
+  const handleSortChange = (e) => {
+    setSortBy(e.target.value);
+  };
   const fetchRecipes = async () => {
     try {
       const response = await fetch(`${API_URL}/recipe/get`);
@@ -44,8 +77,26 @@ function Recipes() {
         <AnimatedText text="HENÜZ BİR YEMEK YOK" />
       ) : (
         <Row className="recipe-list mt-3">
-          {recipes.map((recipe) => (
-            <Col key={recipe._id} md={3} className="mb-4">
+          <div className="my-1  py-3 d-flex justify-content-end border-bottom border-1 border-black">
+            <select
+              id="sort"
+              className="form-select bg-danger-subtle"
+              value={sortBy}
+              onChange={handleSortChange}
+            >
+              <option value="">Sıralama seçin</option>
+              <option value="alphabeticalOne">Alfabetik (a-z)</option>
+              <option value="alphabeticalTwo">Alfabetik (z-a)</option>
+              <option value="likeCountUp">Beğeni Sayısı ↑</option>
+              <option value="likeCountDown">Beğeni Sayısı ↓</option>
+              <option value="dislikeCountUp">Negatif Sayısı ↑</option>
+              <option value="dislikeCountDown">Negatif Sayısı ↓</option>
+              <option value="favoriCountUp">Favori Sayısı ↑</option>
+              <option value="favoriCountDown">Favori Sayısı ↓</option>
+            </select>
+          </div>
+          {sortRecipes(recipes).map((recipe) => (
+            <Col key={recipe._id} md={3} className="my-3">
               <Card className="border border-black rounded border-1">
                 <CardImg
                   top
@@ -81,7 +132,7 @@ function Recipes() {
                       to={`/tarif/${recipe._id}`}
                       className="btn btn-primary w-100"
                     >
-                      Detayları Gör
+                      Detayları Görüntüle
                     </Link>
                   </Row>
                 </CardBody>

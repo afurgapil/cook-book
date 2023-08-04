@@ -189,7 +189,7 @@ function Foods() {
                       to={`/tarif/${recipe._id}`}
                       className="btn btn-primary w-100"
                     >
-                      View Details
+                      Detayları Görüntüle
                     </Link>
                   </Row>
                 </CardBody>

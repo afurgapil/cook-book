@@ -261,7 +261,7 @@ function RecipeDetails() {
               </Col>
             </Row>
             <Row className="my-5">
-              <ListGroup numbered>
+              <ListGroup>
                 <ListGroupItemHeading className="fw-bolder fs-1 border-bottom border-black border-2">
                   TARİF
                 </ListGroupItemHeading>
