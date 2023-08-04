@@ -11,10 +11,8 @@ import { ToastContainer, toast } from "react-toastify";
 import API_URL from "../config";
 const ManageUsers = () => {
   const [users, setUsers] = useState([]);
-  const [dbIngredients, setDbIngredients] = useState([]);
   useEffect(() => {
     fetchUsers();
-    fetchIngredients();
   }, []);
 
   const fetchUsers = async () => {
@@ -27,49 +25,6 @@ const ManageUsers = () => {
     }
   };
 
-  const fetchIngredients = async () => {
-    try {
-      const response = await fetch(`${API_URL}/ingredients/get`);
-      if (response.ok) {
-        const data = await response.json();
-        setDbIngredients(data);
-      } else {
-        throw new Error("Failed to fetch ingredients.");
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  const updateIngredients = async () => {
-    try {
-      const response = await fetch(`${API_URL}/user/update/ingredients`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ ingredients: dbIngredients }),
-      });
-
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-
-      const data = await response.json();
-      console.log(data);
-      toast.success("Üyelerin Malzeme Listesi Güncellendi!", {
-        position: "top-right",
-        autoClose: 1000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
-    } catch (error) {
-      console.error("Error updating ingredient list:", error.message);
-    }
-  };
   const handleAdminButtonClick = async (userId, value) => {
     try {
       const response = await fetch(
@@ -104,7 +59,10 @@ const ManageUsers = () => {
   };
 
   return (
-    <Container id="page">
+    <Container
+      id="page"
+      className="d-flex align-items-start justify-content-center"
+    >
       <ToastContainer
         position="top-right"
         autoClose={1000}
@@ -117,18 +75,21 @@ const ManageUsers = () => {
         pauseOnHover
         theme="light"
       />
-      <div className="row mt-5">
-        <div className="col">
+      <div className="row mt-5 w-75">
+        <div className="col ">
           <ListGroup>
             {users.map((user) => (
-              <ListGroupItem key={user._id} className="d-flex flex-row">
+              <ListGroupItem
+                key={user._id}
+                className="d-flex flex-column flex-md-row"
+              >
                 <div className="col">
                   <ListGroupItemText>
                     Kullanıcı Adı:{user.username}
                   </ListGroupItemText>
                   <ListGroupItemText>Mail:{user.email}</ListGroupItemText>
                 </div>
-                <div className="col">
+                <div className="row">
                   <Button
                     color="primary"
                     size="sm"
@@ -151,14 +112,6 @@ const ManageUsers = () => {
               </ListGroupItem>
             ))}
           </ListGroup>
-        </div>
-        <div className="col d-flex justify-content-start align-items-center text-center">
-          <button
-            onClick={updateIngredients}
-            className="btn btn-danger btn-lg my-auto"
-          >
-            Malzeme Listesini Güncelle
-          </button>
         </div>
       </div>
     </Container>

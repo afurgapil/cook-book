@@ -18,6 +18,41 @@ const CreateIngredient = () => {
   const [name, setName] = useState("");
   const [isAvailable] = useState(false);
   const [category, setCategory] = useState("");
+
+  const saveChanges = async (e) => {
+    e.preventDefault();
+    await handleCreateIngredient(e);
+    await updateIngredients();
+  };
+
+  const updateIngredients = async () => {
+    try {
+      const response = await fetch(`${API_URL}/ingredients/get`);
+      if (response.ok) {
+        const fetchedData = await response.json();
+
+        const responsee = await fetch(`${API_URL}/user/update/ingredients`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ ingredients: fetchedData }),
+        });
+
+        if (!responsee.ok) {
+          throw new Error("Network response was not ok");
+        }
+
+        const updatedData = await responsee.json();
+        console.log(updatedData);
+      } else {
+        throw new Error("Failed to fetch ingredients.");
+      }
+    } catch (error) {
+      console.error("Error updating ingredient list:", error.message);
+    }
+  };
+
   const handleCreateIngredient = async (e) => {
     e.preventDefault();
 
@@ -73,7 +108,7 @@ const CreateIngredient = () => {
       <Row className="justify-content-center">
         <Col md={6}>
           <h2 className="text-center mt-1">Malzeme Ekle</h2>
-          <Form onSubmit={handleCreateIngredient}>
+          <Form onSubmit={saveChanges}>
             <FormGroup>
               <Label for="name">Adı:</Label>
               <Input

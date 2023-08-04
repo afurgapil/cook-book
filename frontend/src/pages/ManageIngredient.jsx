@@ -16,6 +16,41 @@ function EditIngredient() {
       .sort((a, b) => a.name.localeCompare(b.name));
     setSortedIngredients(value);
   }, [ingredients]);
+  const updateIngredients = async () => {
+    try {
+      const response = await fetch(`${API_URL}/ingredients/get`);
+      if (response.ok) {
+        const fetchedData = await response.json();
+
+        const responsee = await fetch(`${API_URL}/user/update/ingredients`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ ingredients: fetchedData }),
+        });
+
+        if (!responsee.ok) {
+          throw new Error("Network response was not ok");
+        }
+
+        const updatedData = await responsee.json();
+        console.log(updatedData);
+      } else {
+        throw new Error("Failed to fetch ingredients.");
+      }
+    } catch (error) {
+      console.error("Error updating ingredient list:", error.message);
+    }
+  };
+  const saveDelete = async (id) => {
+    await handleDeleteClick(id);
+    await updateIngredients();
+  };
+  const saveEdit = async (id) => {
+    await handleSaveClick(id);
+    await updateIngredients();
+  };
   const fetchIngredients = async () => {
     try {
       const userIngredientsResponse = await fetch(`${API_URL}/ingredients/get`);
@@ -124,7 +159,7 @@ function EditIngredient() {
                 <Button
                   color="primary"
                   className="me-3"
-                  onClick={() => handleSaveClick(ingredient._id)}
+                  onClick={() => saveEdit(ingredient._id)}
                 >
                   Kaydet
                 </Button>
@@ -153,7 +188,7 @@ function EditIngredient() {
                 <Button
                   color="danger"
                   className="mt-2"
-                  onClick={() => handleDeleteClick(ingredient._id)}
+                  onClick={() => saveDelete(ingredient._id)}
                 >
                   Sil
                 </Button>
